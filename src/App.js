@@ -76,6 +76,9 @@ export const App = () => {
     setWorktime(workTime * 60)
     setTime(workTime * 60)
     setBreaktime(breakTime * 60)
+    setIsActive(false)
+    setMode("work")
+    setProgress(100)
   }
 
   const editTime = () => {
@@ -83,6 +86,7 @@ export const App = () => {
     setBreaktime(0)
     setTime(0)
     setIsActive(false)
+    setMode("work")
     setProgress(100)
     setTimeout(setSettings(true), 5000);
   }
