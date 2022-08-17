@@ -1,13 +1,13 @@
 # 🍅 Pomodoro-Timer
 
 ### Pantalla de configuración
-![settings](/Screenshot/Settings.png)
+![settings](/Screenshots/Settings.png)
 
 ### Pantalla principal (Tiempo de trabajo)
-![Tiempo de trabajo](/Screenshot/WorkTime.png)
+![Tiempo de trabajo](/Screenshots/WorkTime.png)
 
 ### Pantalla principal (Tiempo de descanso)
-![Tiempo de descanso](/Screenshot/BreakTime.png)
+![Tiempo de descanso](/Screenshots/BreakTime.png)
 
 <br />
 

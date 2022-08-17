@@ -1,42 +1,14 @@
 import React, {useState} from 'react'
 
-import { Dialog, DialogActions, DialogContent, Divider, Typography } from '@mui/material';
-
-import Button from '@mui/material/Button';
+import { 
+    Dialog, 
+    DialogActions, 
+    DialogContent, 
+    Divider, 
+    Typography 
+} from '@mui/material';
 
 import {Controls} from './Controls/Controls';
-
-
-/*    
-const useStyles = makeStyles((theme) => ({
-    title: {
-        fontSize: "25px",
-        textAlign: "center",
-        color: "black",
-        fontWeight: "bold",
-        margin: theme.spacing(2),
-    },
-    subtitle: {
-        fontSize: "20px",
-        textAlign: "center"
-    },
-    button: {
-        color: 'white',
-        margin: theme.spacing(2),
-        backgroundColor: '#7408A7',
-        '&:hover': {
-            backgroundColor: '#5F169B ',
-        },
-    },
-    loading: {
-        margin: theme.spacing(2),
-    },
-    text: {
-        textAlign: "center"
-    },
-}));
-
-*/
 
 export const Settings = (props) => {
     const [workTime, setWorkTime] = useState(25);
@@ -56,10 +28,28 @@ export const Settings = (props) => {
     }
 
     return (
-        <Dialog open={props.open} aria-labelledby="form-dialog-title" >
+        <Dialog open={props.open}>
             <DialogContent sx={{padding: "2rem"}}>
-                <Typography variant="h5" component="div" color="black">Configuración</Typography>
-                <Typography variant="subtitle2" component="div" color="black">Define el tiempo de trabajo y descanso</Typography>
+                <Typography 
+                    variant="h5" 
+                    sx={{
+                        fontSize: "24px",
+                        color: "black",
+                        fontWeight: "bold"
+                    }}
+                >
+                    Configuración
+                </Typography>
+
+                <Typography 
+                    variant="subtitle2"
+                    sx={{
+                        fontSize: "16px",
+                        color: "black",
+                    }}
+                >
+                    Define el tiempo de trabajo y descanso
+                </Typography>
                     
                 <Divider sx={{marginBottom: "2rem"}}/>                  
 
@@ -83,12 +73,13 @@ export const Settings = (props) => {
             </DialogContent>
 
             <DialogActions sx={{padding: " 0 1rem 1rem 0"}}>
-                <Button
-                    variant="outlined"
+                <Controls.Button
                     onClick={(e) => handleSubmit(e)}
-                >
-                    Aceptar
-                </Button>
+                    text="Aceptar"
+                    sx={{
+                        color: "#000"
+                    }}
+                />
             </DialogActions>
         </Dialog>
     )

@@ -1,23 +1,31 @@
-import { useEffect, useState } from 'react';
-import { Box, Grid, IconButton, Typography } from '@mui/material';
-import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import SettingsIcon from '@mui/icons-material/Settings';
+import { 
+  useEffect, 
+  useState 
+} from 'react';
 
+import { 
+  Box, 
+  Typography, 
+  IconButton, 
+  CircularProgress 
+} from '@mui/material';
+
+import SettingsIcon from '@mui/icons-material/Settings';
 
 import { Container } from '@mui/system';
 import { CustomTheme } from './components/CustomTheme';
 import { Header } from './components/Header';
 import { Settings } from './components/Settings';
+import { Controls } from './components/Controls/Controls';
 
 
 export const App = () => {
-  const [worktime, setWorktime] = useState(0);
-  const [breaktime, setBreaktime] = useState(0);
-  const [mode, setMode] = useState("work")
-  const [isActive, setIsActive] = useState(false)
-  const [time, setTime] = useState(0);
-  const [progress, setProgress] = useState(100);
+  const [worktime, setWorktime] = useState(0); //Tiempo de trabajo.
+  const [breaktime, setBreaktime] = useState(0); //Tiempo de descanso.
+  const [mode, setMode] = useState("work") //Modo [work - break] indica el modo actual.
+  const [isActive, setIsActive] = useState(false) //Indica si esta corriendo el tiempo.
+  const [time, setTime] = useState(0); //Variable aux para descontar el tiempo [work - break].
+  const [progress, setProgress] = useState(100); //Porcentaje de la barra.
 
   const [settings, setSettings] = useState(true);
 
@@ -98,32 +106,54 @@ export const App = () => {
       <Container sx={{ display: 'flex', justifyContent: "center", height: "100vh", alignItems: "center" }}>
         <Box className='timer' sx={{ display: 'flex', flexDirection: "column", alignItems: "center" }}>
           <Box sx={{ position: "relative", textAlign: "center" }}>
-            <Typography variant="h1" sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>{timerSeconds(time)}</Typography>
-            <CircularProgress variant="determinate" sx={{ color: "#283347" }} size={400} value={100} />
-            <CircularProgress variant="determinate" sx={{ position: "absolute", left: 0, color: mode === "work" ? "#f54768" : "#6bbd99" }} size={400} value={progress} />
+            <Typography 
+              variant="h1" 
+              sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+            >
+              {timerSeconds(time)}
+            </Typography>
+
+            <CircularProgress 
+              variant="determinate"
+              size={400}
+              value={100}
+              sx={{ color: "#283347" }} 
+            />
+            <CircularProgress 
+              variant="determinate" 
+              size={400} 
+              value={progress} 
+              sx={{ position: "absolute", left: 0, color: mode === "work" ? "#f54768" : "#6bbd99" }} 
+            />
           </Box>
-          <Grid container className='settings' sx={{ padding: "1.25rem" }} alignItems="center" justifyContent="center" spacing={1}>
-            <Grid item>
-              <Button variant="outlined" disabled={worktime === 0 || breaktime === 0} onClick={() => { selectState() }}>{isActive === false ? "Start" : "Pause"}</Button>
-            </Grid>
 
-            <Grid item>
-              <Button variant="outlined" disabled={isActive === false} onClick={() => { reset() }}>Reset</Button>
-            </Grid>
+          <Box alignItems="center" justifyContent="center" sx={{ padding: "1.25rem" }}>
+              
+              <Controls.Button 
+                disabled={worktime === 0 || breaktime === 0} 
+                onClick={() => { selectState() }}
+                text={isActive === false ? "Start" : "Pause"}
+                sx={{ fontWeight: "bold" ,color: "#fff",margin: "1rem" }}  
+              />
 
-            <Grid item>
+              <Controls.Button 
+                disabled={isActive === false} 
+                onClick={() => { reset() }}
+                text="Reset"
+                sx={{ fontWeight: "bold" ,color: "#fff", margin: "1rem" }}
+              />
+
               <IconButton
-                  size="large"
-                  edge="start"
-                  aria-label="menu"
-                  sx={{ mr: 2, color: isActive === false? "white" : "grey"}}
-                  onClick={ () => editTime()}
-                  disabled={isActive === true}
+                size="large"
+                edge="start"
+                aria-label="menu"
+                sx={{margin: "0.5rem", color: isActive === false? "white" : "grey"}}
+                onClick={ () => editTime()}
+                disabled={isActive === true}
               >
                 <SettingsIcon sx={{fontSize:"2rem"}}/>
               </IconButton>
-            </Grid>
-          </Grid>
+          </Box>
         </Box>
 
         <Settings
